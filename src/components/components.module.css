@@ -1,0 +1,70 @@
+.btn{
+    color: #2A2C36;
+    background-color: #60D2F5;
+    border-radius: 3px;
+    font-size: x-large;
+    font-weight: bold;
+    height: 30px;
+    outline: 1px solid transparent;
+    border: none;
+}
+.btn.disabled{
+    opacity: 0.5;
+}
+.btn:active {
+    color: #60D2F5;
+    background-color: #2A2C36;
+    transition: 0.2s;
+}
+.inputWrapper{
+    color:#60D2F5;
+    font-weight: bolder;
+    display: flex;
+    justify-content: space-around;
+    font-size:20px;
+    margin: 24px 10px;
+    
+}
+/* .inputWrapper div{
+    
+} */
+.inputWrapper input{
+    border: #60D2F5 solid 2px;
+    border-radius: 5px;
+    outline: 1px solid transparent;
+    text-align: center;
+    width: 100px;
+}
+.wrapper{
+    border: solid 1px  #60D2F5;
+    border-radius: 10px;
+    padding:15px;
+    width: 400px;
+    margin: 20px 30px;
+}
+.btnWrapper{
+    border: solid 1px  #60D2F5;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-around;
+    padding:10%;
+    margin-top: 15px;
+}
+.displayCounter{
+    border: solid 1px  #60D2F5;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    padding:10%;
+    font-size:25px;
+    font-weight: bolder;
+    /* color:value===5?'red':'white' */
+    color: #60D2F5;
+}
+.red{
+    color: red;
+}
+.displayTuner{
+    border: solid 1px  #60D2F5;
+    border-radius: 10px;
+}
