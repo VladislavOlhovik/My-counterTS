@@ -3,15 +3,14 @@ import s from './components.module.css';
 
 
 type PropsInputType={
-    title:string
     value:number
+    error: boolean
     addValue:(value:number)=>void
 }
 
 
 
-export const Input = (props:PropsInputType) => {
-    // debugger
+export const InputMin = (props:PropsInputType) => {
   const addValue=(e:ChangeEvent<HTMLInputElement>)=>{
     props.addValue(+e.currentTarget.value)
   }
@@ -19,8 +18,8 @@ export const Input = (props:PropsInputType) => {
 
   return (
     <div className={s.inputWrapper}>
-      <div>{props.title}</div>
-      <input type="number" value={props.value} onChange={addValue}/>
+      <div>start value: </div>
+      <input className={props.value<0||props.error?s.error:''} type="number" value={props.value} onChange={addValue}/>
     </div>
   );
 };

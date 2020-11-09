@@ -55,8 +55,8 @@
     border-radius: 10px;
     display: flex;
     justify-content: center;
-    padding:10%;
-    font-size:25px;
+    padding:11% 0;
+    font-size:28px;
     font-weight: bolder;
     /* color:value===5?'red':'white' */
     color: #60D2F5;
@@ -67,4 +67,12 @@
 .displayTuner{
     border: solid 1px  #60D2F5;
     border-radius: 10px;
+}
+.error{
+    border: red solid 2px;
+    background-color: #ff9898;
+}
+.number{
+    padding: 4%;
+    font-size: 70px;
 }

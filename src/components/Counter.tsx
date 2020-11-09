@@ -6,6 +6,7 @@ import Button from './button';
 type PropsCounterType={
     maxValue:number
     startValue:number|string
+    error: boolean
     counter:()=>void
     reset:()=>void
 }
@@ -16,8 +17,7 @@ function Counter(props:PropsCounterType) {
     if(typeof props.startValue==='string'){
         disabled=true
     }
-    // let dis = false
-    // if()
+    
     const Counter = () => {
         props.counter()
     }
@@ -26,7 +26,7 @@ function Counter(props:PropsCounterType) {
     }
     return (
         <div className={s.wrapper}>
-            <div className={disabled||props.startValue===props.maxValue?`${s.red} ${s.displayCounter}`:s.displayCounter}>
+            <div className={`${typeof props.startValue=="number"?`${s.number}`:''} ${props.error||props.startValue===props.maxValue?`${s.red} ${s.displayCounter}`:s.displayCounter}`}>
                 <Display value={props.startValue} />
             </div>
             <div className={s.btnWrapper}>
