@@ -1,44 +1,61 @@
-import React from 'react';
-import s from './components.module.css';
-import Button from './button';
-import { InputMax } from './inputMax';
-import { InputMin } from './inputMin';
+import React from "react";
+import s from "./components.module.css";
+import Button from "./button";
+import { InputMax } from "./inputMax";
+import { InputMin } from "./inputMin";
+import { useDispatch, useSelector } from "react-redux";
+import { RootStateType } from "../redux/store";
+import {
+  addMaxValueAC,
+  addMinValueAC,
+  saveValueAC,
+  StateType,
+} from "../redux/app-reducer";
 
-type PropsTunerType={
-    maxValue:number
-    minValue:number
-    error: boolean
-    addMaxValue:(value:number)=>void
-    addMinValue:(value:number)=>void
-    saveValue:()=>void
-    value:string|number
+function Tuner() {
+  const state = useSelector<RootStateType, StateType>((state) => state.app);
+  const dispatch = useDispatch();
+
+  let disablet = false;
+  if (typeof state.value === "number") {
+    disablet = true;
+  }
+  if (
+    state.startValue < 0 ||
+    state.maxValue < 0 ||
+    state.startValue >= state.maxValue
+  ) {
+    disablet = true;
+  }
+  const addMaxValue = (value: number) => {
+    dispatch(addMaxValueAC(value));
+  };
+  const addMinValue = (value: number) => {
+    dispatch(addMinValueAC(value));
+  };
+  const saveValue = () => {
+    dispatch(saveValueAC());
+  };
+
+  return (
+    <div className={s.wrapper}>
+      <div className={s.displayTuner}>
+        <InputMax
+          error={state.startValue >= state.maxValue}
+          value={state.maxValue}
+          addValue={addMaxValue}
+        />
+        <InputMin
+          error={state.error}
+          value={state.startValue}
+          addValue={addMinValue}
+        />
+      </div>
+      <div className={s.btnWrapper}>
+        <Button counter={saveValue} disabled={disablet} name={"Set"} />
+      </div>
+    </div>
+  );
 }
 
-
-
-function Tuner(props:PropsTunerType) {
-    let disablet = false
-    if(typeof props.value==="number"){
-        disablet = true
-    }if(props.minValue<0||props.maxValue<0||props.minValue>=props.maxValue){
-        disablet = true
-    }
-        
-    const saveValue = () => {
-        props.saveValue()
-    }
-    
-    return (
-        <div className={s.wrapper}>
-            <div className={s.displayTuner}>
-                <InputMax error = {props.minValue>=props.maxValue} value={props.maxValue} addValue={props.addMaxValue}/>
-                <InputMin error = {props.error} value={props.minValue} addValue={props.addMinValue}/>
-            </div>
-            <div className={s.btnWrapper}>
-                <Button counter={saveValue} disabled={disablet} name={'Set'}/>
-            </div>
-        </div>
-    )
-}
-
-export default Tuner
+export default Tuner;

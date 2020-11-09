@@ -1,40 +1,47 @@
-import React from 'react';
-import s from './components.module.css';
-import Display from './display';
-import Button from './button';
+import React from "react";
+import s from "./components.module.css";
+import Display from "./display";
+import Button from "./button";
+import { useDispatch, useSelector } from "react-redux";
+import { RootStateType } from "../redux/store";
+import { counterAC, saveValueAC, StateType } from "../redux/app-reducer";
 
-type PropsCounterType={
-    maxValue:number
-    startValue:number|string
-    error: boolean
-    counter:()=>void
-    reset:()=>void
+function Counter() {
+  const state = useSelector<RootStateType, StateType>((state) => state.app);
+  const dispatch = useDispatch();
+
+  let disabled = false;
+  if (typeof state.value === "string") {
+    disabled = true;
+  }
+  const saveValue = () => {
+    dispatch(saveValueAC());
+  };
+  const counter = () => {
+    dispatch(counterAC());
+  };
+
+  return (
+    <div className={s.wrapper}>
+      <div
+        className={`${typeof state.value == "number" ? `${s.number}` : ""} ${
+          state.error || state.value === state.maxValue
+            ? `${s.red} ${s.displayCounter}`
+            : s.displayCounter
+        }`}
+      >
+        <Display value={state.value} />
+      </div>
+      <div className={s.btnWrapper}>
+        <Button
+          counter={counter}
+          disabled={disabled || state.value === state.maxValue}
+          name={"Inc"}
+        />
+        <Button counter={saveValue} disabled={disabled} name={"Reset"} />
+      </div>
+    </div>
+  );
 }
 
-
-function Counter(props:PropsCounterType) {
-    let disabled = false
-    if(typeof props.startValue==='string'){
-        disabled=true
-    }
-    
-    const Counter = () => {
-        props.counter()
-    }
-    const resetValue = () => {
-        props.reset()
-    }
-    return (
-        <div className={s.wrapper}>
-            <div className={`${typeof props.startValue=="number"?`${s.number}`:''} ${props.error||props.startValue===props.maxValue?`${s.red} ${s.displayCounter}`:s.displayCounter}`}>
-                <Display value={props.startValue} />
-            </div>
-            <div className={s.btnWrapper}>
-                <Button counter={Counter} disabled={disabled||props.startValue===props.maxValue} name={'Inc'}/>
-                <Button counter={resetValue} disabled={disabled} name={'Reset'}/>
-            </div>
-        </div>
-    )
-}
-
-export default Counter
+export default Counter;

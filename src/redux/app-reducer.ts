@@ -1,18 +1,18 @@
- export type StateType={
-    maxValue:number,
-    startValue:number,
-    value:number|string,
-    error:boolean,
+export type StateType = {
+    maxValue: number,
+    startValue: number,
+    value: number | string,
+    error: boolean,
 }
 type ActionAppReducerType = ReturnType<typeof addMaxValueAC>
-|ReturnType<typeof addMinValueAC>
-|ReturnType<typeof saveValueAC>
-|ReturnType<typeof counterAC>
-let initState:StateType = {
-    maxValue:5,
-    value:"enter values and press 'set'",
-    startValue:0,
-    error:false,
+    | ReturnType<typeof addMinValueAC>
+    | ReturnType<typeof saveValueAC>
+    | ReturnType<typeof counterAC>
+let initState: StateType = {
+    maxValue: 5,
+    value: "enter values and press 'set'",
+    startValue: 0,
+    error: false,
 }
 
 export const appReducer = (state = initState, action: ActionAppReducerType) => {
@@ -37,7 +37,7 @@ export const appReducer = (state = initState, action: ActionAppReducerType) => {
 
 
 
-export const addMaxValueAC = (value:number) => ({type:'ADD_MAX_VALUE', value} as const) 
-export const addMinValueAC = (value:number) => ({type:'ADD_MIN_VALUE', value} as const) 
-export const saveValueAC = () => ({type:'SAVE_VALUE'} as const) 
-export const counterAC = () => ({type:'NEW_COUNT'} as const) 
+export const addMaxValueAC = (value: number) => ({ type: 'ADD_MAX_VALUE', value } as const)
+export const addMinValueAC = (value: number) => ({ type: 'ADD_MIN_VALUE', value } as const)
+export const saveValueAC = () => ({ type: 'SAVE_VALUE' } as const)
+export const counterAC = () => ({ type: 'NEW_COUNT' } as const) 
